@@ -1,0 +1,188 @@
+@font-face {
+    font-family: 'Aether';
+    src: url(/fonts/AetherMonoARegular.otf);
+}
+
+body{
+    margin: 0;
+    color:#7003ff;
+    font-family: 'Aether';
+    background: rgb(124,0,255);
+    background: linear-gradient(360deg, rgba(124,0,255,1) 19%, rgba(218,120,182,1) 51%, rgba(255,167,154,1) 76%, rgba(75,152,210,1) 100%); 
+
+}
+
+
+.wrapper-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+    position: absolute;
+    gap: 2em;
+    /* background-color: aqua; */
+    width: 100vw;
+    height: 100vh;
+    bottom: 0;
+    margin-bottom: 5em;
+  }
+  
+
+.container{
+    /* position: relative; */
+    width: 30vw;
+    padding: 2em;
+    border-radius: 1em;
+    border: 4px ridge rgb(219, 189, 229);
+    background-color: rgba(255, 255, 255, 0.25);
+    backdrop-filter: blur(10px);
+    box-shadow: inset 2px 2px 5px grey;
+    cursor: pointer;
+    z-index: 2;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.label{
+    color:rgb(112, 3, 255);
+    font-family: 'Aether';
+    margin: 0 1em;
+    transition: opacity 0.2s ease-in-out;
+    /* animation: fadeIn 5s; */
+    /* text-align: center; */
+
+}
+
+.next{
+    color:#7003ff;
+    /* font-family: 'Aether';
+    font-size: 1.5em; */
+    /* padding: 0.5em; */
+    /* animation: blinker 2s linear infinite; */
+}
+@keyframes blinker {
+    50% {
+      opacity: 0;
+    }
+  }
+
+.image{
+    padding: 0.5em;
+
+}
+
+audio{
+    position: absolute;
+    /* z-index: 1; */
+    top:0;
+    right: 0;
+    padding: 2em;
+}
+
+a{
+    text-decoration: none;
+    color:#7003ff;
+    cursor: pointer;
+}
+
+a:hover{
+    color: rgb(255, 0, 106);
+}
+
+.menu{
+    position: fixed;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    top: 0;
+    right: 0;
+    margin-right: 2em;
+
+}
+
+.menu-button{
+    padding: 0.2em 0.5em;
+    font-size: 2em;
+    color:#7003ff;
+    margin: 1em;
+    border-radius: 100%;
+    background-color: rgba(255, 255, 255, 0.25);
+    border: 4px groove #dbbde5;
+    box-shadow: inset 2px 2px 5px grey;
+    backdrop-filter: blur(5px);
+    cursor: pointer;
+}
+.menu-button:hover{
+ color: rgb(255, 0, 106);
+}
+
+.menu-clicked{
+    transform: rotate(0.37turn);
+}
+
+
+.other-icons{
+    display: flex;
+    flex-direction: column;
+    gap: 2em;
+    align-items: center;
+    opacity: 0;
+    padding: 2em;
+    border: 4px groove #dbbde5;
+    background-color: rgba(255, 255, 255, 0.25);
+    backdrop-filter: blur(5px);
+    border-radius: 1em;
+    transition: opacity 0.5s ease-in-out; 
+}
+
+.visible{
+visibility: visible;
+opacity: 1;
+transition: opacity 0.5s ease-in-out; 
+}
+
+.audio-icon{
+    width: 30px;
+    height: 30px;
+}
+.bottom-menu{
+    /* background-color: blue; */
+    padding: 1em;
+    z-index: 10;
+    display: flex;
+    justify-content: space-between;
+    /* position: relative; */
+    /* bottom: 0; */
+
+    width: 30vw;
+    /* margin-bottom: 8em; */
+
+}
+
+.figma-link{
+    background: violet;
+    border: 2px solid #7003ff;
+    border-radius: 1.5em;
+    text-decoration: none;
+    padding: 1em;
+    margin: 0 1em; 
+    display: inline-block; 
+    transition: opacity 0.5s ease-in-out; 
+}
+
+.about-link{
+    background: violet;
+    display: inline-block; 
+    border: 2px solid #7003ff;
+    padding: 1em;
+    margin: 0 1em; 
+    border-radius: 1.5em;
+    transition: opacity 0.5s ease-in-out; 
+}
+
+@media only screen and (max-width: 767px) {
+    .container{
+        width: 80vw;
+    }
+  }
