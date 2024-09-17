@@ -3,6 +3,11 @@
     src: url(/fonts/AetherMonoARegular.otf);
 }
 
+@font-face {
+    font-family: 'New Edge Regular';
+    src: url(/fonts/NewEdge666-RegularRounded.otf);
+}
+
 body{
     margin: 0;
     color:#7003ff;
@@ -20,7 +25,6 @@ body{
     justify-content: flex-end;
     position: absolute;
     gap: 2em;
-    /* background-color: aqua; */
     width: 100vw;
     height: 100vh;
     bottom: 0;
@@ -98,6 +102,7 @@ a:hover{
     top: 0;
     right: 0;
     margin-right: 2em;
+    z-index: 10;
 
 }
 
@@ -139,7 +144,8 @@ a:hover{
 .visible{
 visibility: visible;
 opacity: 1;
-transition: opacity 0.5s ease-in-out; 
+z-index: 10;
+/* transition: opacity 0.5s ease-in-out;  */
 }
 
 .audio-icon{
@@ -171,6 +177,7 @@ transition: opacity 0.5s ease-in-out;
     transition: opacity 0.5s ease-in-out; 
 }
 
+
 .about-link{
     background: violet;
     display: inline-block; 
@@ -181,8 +188,64 @@ transition: opacity 0.5s ease-in-out;
     transition: opacity 0.5s ease-in-out; 
 }
 
-@media only screen and (max-width: 767px) {
+#about{
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    top:0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(255, 255, 255, 0.25);
+    /* backdrop-filter: blur(2px); */
+}
+
+#escape{
+    align-self: flex-end;
+}
+
+
+.hidden{
+      opacity: 0;
+      z-index: 1;
+
+}
+
+#escape:hover{
+    color:rgb(255, 0, 106);
+}
+
+#text{
+    width: 50vw;
+    /* height: 50vh; */
+    align-self: center;
+     background: rgb(213, 211, 211);
+     display: flex;
+     flex-direction: column;
+     gap: 1em;
+     line-height: 1.4;
+     font-family: 'New Edge Regular';
+     /* margin-bottom: 4em; */
+     padding-bottom: 4.5em;
+}
+
+h1{
+    font-family: 'Aether';
+    text-transform: uppercase;
+    font-size: 12px;
+    align-self: flex-start;
+}
+
+.monologue a{
+    /* color: violet; */
+    text-decoration: underline rgb(176, 148, 246) 3px;
+}
+
+
+
+@media only screen and (max-width: 700px) {
     .container{
         width: 80vw;
+    
     }
   }

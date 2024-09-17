@@ -20,7 +20,6 @@ let clouds = [], text = [];
 
 const scene = new THREE.Scene()
 
-// scene.fog = new THREE.FogExp2(0xc8aaf0, 0.08);
 
 const camera = new THREE.PerspectiveCamera( 50, window.innerWidth / window.innerHeight, 0.1, 1000)
 camera.position.set(-0.2, 5, 10) 
@@ -99,8 +98,8 @@ cloudModels.forEach((cloudPath, index) => {
           x: "+=" + visibleWidth,    // Move the cloud to the right by one screen width
           duration: 20 + Math.random() * 4, // Randomized speed for variation
           repeat: -1,
-          yoyo: true,                // Infinite loop
-          ease: "linear",            // Smooth linear movement
+          yoyo: true,                
+          ease: "linear",            
           modifiers: {
               x: function(x) {
                   return (parseFloat(x) % (visibleWidth * 2)) - visibleWidth; // Wrap around screen width
@@ -162,6 +161,8 @@ resume.target = '_blank'
 
 const aboutLink2 = document.createElement('a')
 aboutLink2.textContent = 'About'
+aboutLink2.className = 'about-link-two'
+
 
 const work = document.createElement('a')
 work.textContent = 'Work'
@@ -173,10 +174,10 @@ archive.textContent = 'Archive'
 archive.href = 'https://bozo.services'
 archive.target = '_blank'
 
-const instagram = document.createElement('a')
-instagram.textContent = 'Instagram'
-instagram.href = 'https://instagram.com/bozobill'
-instagram.target = '_blank'
+// const instagram = document.createElement('a')
+// instagram.textContent = 'Instagram'
+// instagram.href = 'https://instagram.com/bozobill'
+// instagram.target = '_blank'
 
 
 
@@ -184,11 +185,11 @@ instagram.target = '_blank'
 menu.appendChild(menuButton);
 menu.appendChild(otherIcons);
 otherIcons.appendChild(audioIcon);
-otherIcons.appendChild(resume);
 otherIcons.appendChild(aboutLink2);
 otherIcons.appendChild(work);
-otherIcons.appendChild(archive);
-otherIcons.appendChild(instagram);
+otherIcons.appendChild(resume);
+// otherIcons.appendChild(archive);
+// otherIcons.appendChild(instagram);
 
 
 
@@ -273,8 +274,21 @@ aboutLink.textContent = "About Tee"
 aboutLink.style.opacity = '0';
 bottomMenu.appendChild(aboutLink);
 
-// const figmaLink = document.querySelector('.figma-link')
-// const aboutLink = document.querySelector('.about-link')
+const aboutModal = document.querySelector('#about')
+aboutLink.addEventListener('click', () => {
+aboutModal.classList.add('visible');
+aboutModal.classList.remove('hidden');
+})
+aboutLink2.addEventListener('click', () => {
+  aboutModal.classList.add('visible');
+  aboutModal.classList.remove('hidden');
+  console.log('clicked about2')
+})
+const closeAbout = document.querySelector('#escape')
+closeAbout.addEventListener('click', () => {
+  aboutModal.classList.add('hidden');
+})
+
 
 // Function to check if the last text is displayed
 function checkLastText() {
@@ -415,7 +429,7 @@ window.addEventListener('resize', () => {
   });
 
 
-
+// making the geometry for the grass. 
 function convertRange (val, oldMin, oldMax, newMin, newMax) {
     return (((val - oldMin) * (newMax - newMin)) / (oldMax - oldMin)) + newMin;
   }
@@ -464,7 +478,7 @@ function convertRange (val, oldMin, oldMax, newMin, newMax) {
   
   function generateBlade (center, vArrOffset, uv) {
     const MID_WIDTH = BLADE_WIDTH * 0.5; // Adjust this proportionally to make the middle part thicker
-    const TIP_OFFSET = 0.15; // You can adjust this for a larger tip offset
+    const TIP_OFFSET = 0.15; // adjust this for a larger tip offset
     const height = BLADE_HEIGHT + (Math.random() * BLADE_HEIGHT_VARIATION);
   
     const yaw = Math.random() * Math.PI * 2;
@@ -511,6 +525,8 @@ function convertRange (val, oldMin, oldMax, newMin, newMax) {
     return { verts, indices };
   }
 
+  // helper function for the clouds to animate back and forth
+
   function getVisibleWidth(camera, depth){
     const cameraOffset = camera.position.z;
     const vFov = THREE.MathUtils.degToRad(camera.fov);
@@ -519,6 +535,8 @@ function convertRange (val, oldMin, oldMax, newMin, newMax) {
     return heightAtDepth * aspect;
 
   }
+
+
   
   function animate () {
     // controls.update();
