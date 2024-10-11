@@ -5,19 +5,8 @@ import { gsap } from 'gsap'
 import { OrbitControls }  from 'three/addons/controls/OrbitControls.js'
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js'
 import { RGBELoader } from 'three/addons/loaders/RGBELoader.js'
-import { CSS2DRenderer, CSS2DObject } from 'three/addons/renderers/CSS2DRenderer.js'
-
-
-// Parameters
-const PLANE_SIZE = 30;
-const BLADE_COUNT = 100000;
-const BLADE_WIDTH = 0.2; // adjust
-const BLADE_HEIGHT = 0.8;
-const BLADE_HEIGHT_VARIATION = 0.6;
 
 let clouds = [], text = [];
-
-
 const scene = new THREE.Scene()
 
 
@@ -30,14 +19,7 @@ const threeScene = document.querySelector('#scene')
 const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true })
 renderer.setSize( window.innerWidth, window.innerHeight )
 renderer.setAnimationLoop( animate )
-
-const labelRenderer = new CSS2DRenderer();
-labelRenderer.setSize( window.innerWidth, window.innerHeight );
-labelRenderer.domElement.style.position = 'absolute';
-labelRenderer.domElement.style.top = '0px';
-threeScene.appendChild( labelRenderer.domElement );
-
-                
+         
 
 renderer.setPixelRatio(window.devicePixelRatio)
 renderer.setSize(window.innerWidth, window.innerHeight)
@@ -74,7 +56,6 @@ function (gltf){
 }
 )
 
-// cloud
 
 const cloudModels = ['/models/clouds_left.glb', '/models/clouds_right.glb']
 cloudModels.forEach((cloudPath, index) => {
@@ -109,14 +90,6 @@ cloudModels.forEach((cloudPath, index) => {
   });
 });
 
-
-// under plane
-const floor = new THREE.CircleGeometry(PLANE_SIZE/2, PLANE_SIZE/2)
-const floorMaterial = new THREE.MeshBasicMaterial({color: '#390273', side: THREE.DoubleSide})
-const floorPlane = new THREE.Mesh(floor, floorMaterial)
-floorPlane.rotation.x = -Math.PI / 2
-floorPlane.position.y = -0.01
-scene.add(floorPlane)
 
 // menu
 const menu = document.createElement('div');
@@ -166,7 +139,7 @@ aboutLink2.className = 'about-link-two'
 
 const work = document.createElement('a')
 work.textContent = 'Work'
-work.href ='https://www.figma.com/proto/TQfe0qGhQjr2pyMETGBRvn/TeeTopor_DesignPortfolio_2024?page-id=337%3A2&node-id=338-510&node-type=canvas&viewport=450%2C349%2C0.03&t=KnAO1jY15wEU0cYj-1&scaling=contain&content-scaling=fixed'
+work.href ='https://studio.teetopor.art/'
 work.target = '_blank'
 
 const archive = document.createElement('a')
@@ -180,8 +153,6 @@ archive.target = '_blank'
 // instagram.target = '_blank'
 
 
-
-
 menu.appendChild(menuButton);
 menu.appendChild(otherIcons);
 otherIcons.appendChild(audioIcon);
@@ -190,8 +161,6 @@ otherIcons.appendChild(work);
 otherIcons.appendChild(resume);
 // otherIcons.appendChild(archive);
 // otherIcons.appendChild(instagram);
-
-
 
 
 // text prompts
@@ -239,17 +208,12 @@ textContainer.appendChild(nextButton);
 wrapper.appendChild(textContainer);
 
 
-// const welcomeLabel = new CSS2DObject(textContainer);
-// welcomeLabel.position.set(0, -5, 0);
-// welcomeLabel.layers.set(0);
-// scene.add(welcomeLabel);
-
 function fadeInText() {
   welcomeText.style.opacity = 0;  
   welcomeText.style.transition = 'opacity 0.5s ease-in-out'; 
   setTimeout(() => {
     welcomeText.style.opacity = 1; 
-  }, 10);  
+  }, 1000);  
 }
 
 
@@ -311,6 +275,21 @@ welcomeText.addEventListener('click', () => {
 });
 
 
+// Parameters
+const PLANE_SIZE = 30;
+const BLADE_COUNT = 10000;
+const BLADE_WIDTH = 0.2; // adjust
+const BLADE_HEIGHT = 0.8;
+const BLADE_HEIGHT_VARIATION = 0.7;
+
+
+// under plane
+const floor = new THREE.CircleGeometry(PLANE_SIZE/2, PLANE_SIZE/2)
+const floorMaterial = new THREE.MeshBasicMaterial({color: '#390273', side: THREE.DoubleSide})
+const floorPlane = new THREE.Mesh(floor, floorMaterial)
+floorPlane.rotation.x = -Math.PI / 2
+floorPlane.position.y = -0.01
+scene.add(floorPlane)
 
 //shaders for grass
 
@@ -335,10 +314,10 @@ void main() {
   //movement speed
 
   if (color.x > 0.6f) {
-    cpos.x += sin((iTime / 1500.) + (uv.x * waveSize)) * tipDistance;
-    // cpos.z += cos((iTime / 2000.) + (uv.x * waveSize)) * tipDistance;
+    cpos.x += sin((iTime / 1200.) + (uv.x * waveSize)) * tipDistance;
+    // cpos.z += cos((iTime / 1500.) + (uv.x * waveSize)) * tipDistance;
   }else if (color.x > 0.0f) {
-    cpos.x += sin((iTime / 1500.) + (uv.x * waveSize)) * centerDistance;
+    cpos.x += sin((iTime / 1200.) + (uv.x * waveSize)) * centerDistance;
   }
 
   float diff = position.x - cpos.x;
@@ -421,13 +400,6 @@ const grassMaterial = new THREE.ShaderMaterial({
 
 generateField();
 
-window.addEventListener('resize', () => {
-    camera.aspect = window.innerWidth / window.innerHeight
-    camera.updateProjectionMatrix()
-    renderer.setSize(window.innerWidth, window.innerHeight)
-    labelRenderer.setSize( window.innerWidth, window.innerHeight )
-  });
-
 
 // making the geometry for the grass. 
 function convertRange (val, oldMin, oldMax, newMin, newMax) {
@@ -481,7 +453,7 @@ function convertRange (val, oldMin, oldMax, newMin, newMax) {
     const TIP_OFFSET = 0.15; // adjust this for a larger tip offset
     const height = BLADE_HEIGHT + (Math.random() * BLADE_HEIGHT_VARIATION);
   
-    const yaw = Math.random() * Math.PI * 2;
+    const yaw = Math.random() * Math.PI * 2; // where the blade twists
     const yawUnitVec = new THREE.Vector3(Math.sin(yaw), 0, -Math.cos(yaw));
     const tipBend = Math.random() * Math.PI * 2;
     const tipBendUnitVec = new THREE.Vector3(Math.sin(tipBend), 0, -Math.cos(tipBend));
@@ -544,8 +516,14 @@ function convertRange (val, oldMin, oldMax, newMin, newMax) {
     grassUniforms.iTime.value = elapsedTime;
     window.requestAnimationFrame(animate);
     renderer.render( scene, camera );
-    labelRenderer.render( scene, camera );
 
 }
 animate();
+
+window.addEventListener('resize', () => {
+  camera.aspect = window.innerWidth / window.innerHeight
+  camera.updateProjectionMatrix()
+  renderer.setSize(window.innerWidth, window.innerHeight)
+});
+
 

@@ -48,7 +48,7 @@ body{
     align-items: center;
 }
 .label{
-    color:rgb(112, 3, 255);
+    color:#e4d3fb;
     font-family: 'Aether';
     margin: 0 1em;
     transition: opacity 0.2s ease-in-out;
@@ -58,7 +58,8 @@ body{
 }
 
 .next{
-    color:#7003ff;
+    /* color:#7003ff; */
+    color:rgb(228, 211, 251);
     /* font-family: 'Aether';
     font-size: 1.5em; */
     /* padding: 0.5em; */
