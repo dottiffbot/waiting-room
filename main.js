@@ -13,7 +13,7 @@ const scene = new THREE.Scene()
 const camera = new THREE.PerspectiveCamera( 50, window.innerWidth / window.innerHeight, 0.1, 1000)
 camera.position.set(-0.2, 5, 10) 
 camera.rotation.set(-0.1, -0.2, -0.004)
-camera.setFocalLength(10);
+camera.setFocalLength(13);
 
 const threeScene = document.querySelector('#scene')
 const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true })
@@ -129,13 +129,12 @@ audioIcon.addEventListener('click', () => {
 
 const resume = document.createElement('a')
 resume.textContent = 'CV'
-resume.href = 'https://docs.google.com/document/d/12WFJXY8Y1A6OWtH0RYm7YtEvBQPnIjDBeGnILVBjL_c/edit?usp=sharing'
+resume.href = 'https://docs.google.com/document/d/1C8xP_UCQQ4_rMs48h6RJXycYukevY_-JXDpGtxfvE8c/edit?usp=sharing'
 resume.target = '_blank'
 
-const aboutLink2 = document.createElement('a')
-aboutLink2.textContent = 'About'
-aboutLink2.className = 'about-link-two'
-
+const aboutLink = document.createElement('a')
+aboutLink.textContent = 'About'
+aboutLink.className = 'about-link-two'
 
 const work = document.createElement('a')
 work.textContent = 'Work'
@@ -156,7 +155,7 @@ archive.target = '_blank'
 menu.appendChild(menuButton);
 menu.appendChild(otherIcons);
 otherIcons.appendChild(audioIcon);
-otherIcons.appendChild(aboutLink2);
+otherIcons.appendChild(aboutLink);
 otherIcons.appendChild(work);
 otherIcons.appendChild(resume);
 // otherIcons.appendChild(archive);
@@ -167,10 +166,10 @@ otherIcons.appendChild(resume);
 
 text = [
   "Hello, welcome to the waiting room of Tee's Website.", 
-  "It's nice to have you here. Please, take a seat... make yourself comfortable.",
-  "We'd like to invite you into Tee's Website... but it's currently undergoing some serious renovations...",
-  "Unfortunately, it's a bit too unruly for guests at the moment. Our sincerest apologies for the inconvenience :-/",
-  "Would you like to learn more about Tee, or view a presentation of some of their recent works while you wait?"
+  "It's nice to have you here.",
+  "Please, take a seat ... make yourself... comfortable.",
+  "Now then, I suppose you've come here for a reason...",
+  "Would you like to visit Tee's Design Portal or Art Portal? "
 ];
 
 let i = 0; 
@@ -194,59 +193,48 @@ const welcomeText = document.createElement('div');
 welcomeText.className = 'label';
 welcomeText.textContent = text[i];
 
-const nextButton = document.createElement('img');
-nextButton.src='/images/arrow.svg'
-nextButton.style.width = '30px'; 
-nextButton.style.height = '30px';  
+const arrowSvg = `<?xml version="1.0" encoding="UTF-8"?>
+<svg  xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2024.11 1514.92">
+  <path class="cls-1" d="M1989.44,765.4L1428.65,214.62c-73.28-71.97-197.03-20.06-197.03,82.65v1101.57c0,102.71,123.75,154.62,197.03,82.65l560.78-550.78c46.23-45.41,46.23-119.9,0-165.3Z"/>
+</svg>`
+const nextButton = document.createElement('div');
 nextButton.className = 'next';
-
+nextButton.innerHTML = arrowSvg;
 
 textContainer.appendChild(image);  
 textContainer.appendChild(welcomeText); 
 textContainer.appendChild(nextButton);
-
 wrapper.appendChild(textContainer);
-
-
-function fadeInText() {
-  welcomeText.style.opacity = 0;  
-  welcomeText.style.transition = 'opacity 0.5s ease-in-out'; 
-  setTimeout(() => {
-    welcomeText.style.opacity = 1; 
-  }, 1000);  
-}
 
 
 const bottomMenu = document.createElement('div');
 bottomMenu.className = 'bottom-menu';
 wrapper.appendChild(bottomMenu);
 
-// view tee's work
-const figmaLink = document.createElement('a');
-figmaLink.className = 'figma-link';
-figmaLink.href = 'https://www.figma.com/proto/TQfe0qGhQjr2pyMETGBRvn/TeeTopor_DesignPortfolio_2024?page-id=337%3A2&node-id=338-510&node-type=canvas&viewport=450%2C349%2C0.03&t=KnAO1jY15wEU0cYj-1&scaling=contain&content-scaling=fixed'
-figmaLink.target = '_blank'
-figmaLink.textContent = "Work Samples"
-figmaLink.style.opacity = '0';
-bottomMenu.appendChild(figmaLink);
+// view tee's design work
+const designLink = document.createElement('a');
+designLink.className = 'figma-link';
+designLink.href = 'https://studio.teetopor.art/design'
+designLink.target = '_blank'
+designLink.textContent = "Design Work"
+designLink.style.opacity = '0';
+bottomMenu.appendChild(designLink);
 
-// about tee
+// view tee's art work
 
-const aboutLink = document.createElement('a');
-aboutLink.className = 'about-link';
-aboutLink.textContent = "About Tee"
-aboutLink.style.opacity = '0';
-bottomMenu.appendChild(aboutLink);
+const artLink = document.createElement('a');
+artLink.className = 'about-link';
+artLink.href='https://studio.teetopor.art/art'
+artLink.textContent = "Art Work"
+artLink.style.opacity = '0';
+bottomMenu.appendChild(artLink);
 
-const aboutModal = document.querySelector('#about')
+const aboutModal = document.querySelector('#about');
+
 aboutLink.addEventListener('click', () => {
-aboutModal.classList.add('visible');
-aboutModal.classList.remove('hidden');
-})
-aboutLink2.addEventListener('click', () => {
   aboutModal.classList.add('visible');
   aboutModal.classList.remove('hidden');
-  console.log('clicked about2')
+  console.log('clicked about')
 })
 const closeAbout = document.querySelector('#escape')
 closeAbout.addEventListener('click', () => {
@@ -258,26 +246,42 @@ closeAbout.addEventListener('click', () => {
 function checkLastText() {
 
   if (i === text.length -1) {
-    figmaLink.style.opacity = '1' 
-    aboutLink.style.opacity = '1'
+    designLink.style.opacity = '1' 
+    artLink.style.opacity = '1'
+    nextButton.style.opacity = '0'
+    bottomMenu.style.zIndex = '10'
   } else {
-    figmaLink.style.opacity = '0' 
-    aboutLink.style.opacity = '0'
+    designLink.style.opacity = '0' 
+    artLink.style.opacity = '0'
+    nextButton.style.opacity = '1'
+    nextButton.style.transition = 'opacity 1s ease-in-out'
+    bottomMenu.style.zIndex = '0'
   }
 }
 
 welcomeText.addEventListener('click', () => {
   i = (i + 1) % text.length; 
   welcomeText.textContent = text[i];  
-  // fadeInText();
+  fadeInText();
   checkLastText();
   console.log('clicked');
 });
 
 
+
+function fadeInText() {
+  welcomeText.style.opacity = 0;  
+  welcomeText.style.transition = 'opacity 0.5s ease-in-out'; 
+  setTimeout(() => {
+    welcomeText.style.opacity = 1; 
+
+  }, 500);  
+}
+
+
 // Parameters
-const PLANE_SIZE = 30;
-const BLADE_COUNT = 10000;
+const PLANE_SIZE = 20;
+const BLADE_COUNT = 2500; // adjust 
 const BLADE_WIDTH = 0.2; // adjust
 const BLADE_HEIGHT = 0.8;
 const BLADE_HEIGHT_VARIATION = 0.7;
