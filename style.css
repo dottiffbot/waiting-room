@@ -51,11 +51,10 @@ body{
     color:#e4d3fb;
     font-family: 'Aether';
     margin: 0 1em;
-    transition: color 0.2s ease-in-out;
+    transition:opacity 0.2s ease-in-out, color 1s ease-in-out;
     flex: 1;
     max-width: 20vw;
-    /* animation: fadeIn 5s; */
-    /* text-align: center; */
+   opacity: 0;
 }
 
 .container:hover .label{
@@ -197,7 +196,7 @@ z-index: 10;
 
 }
 
-.figma-link{
+.design-link, .art-link{
     background: violet;
     border: 2px solid #7003ff;
     border-radius: 1.5em;
@@ -205,19 +204,15 @@ z-index: 10;
     padding: 1em;
     margin: 0 1em; 
     display: inline-block; 
-    transition: opacity 0.5s ease-in-out;
+    transition: opacity 3s ease-in-out;
 }
 
 
-.about-link{
-    background: violet;
-    display: inline-block; 
-    border: 2px solid #7003ff;
-    padding: 1em;
-    margin: 0 1em; 
-    border-radius: 1.5em;
-    transition: opacity 0.5s ease-in-out; 
 
+.design-link:hover, .art-link:hover{
+    background: rgb(246, 192, 246); 
+    border: 2px solid rgb(255, 0, 106);
+    box-shadow: inset 0.2em 0em 1em #fe6d91;
 }
 
 #about{
@@ -275,9 +270,14 @@ h1{
 
 
 
-@media only screen and (max-width: 700px) {
+@media (max-width: 768px) {
     .container{
         width: 80vw;
-    
+    }
+    .bottom-menu{
+        width: 80vw;
+    }
+    .label{
+        max-width: 50vw;
     }
   }

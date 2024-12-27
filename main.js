@@ -13,7 +13,7 @@ const scene = new THREE.Scene()
 const camera = new THREE.PerspectiveCamera( 50, window.innerWidth / window.innerHeight, 0.1, 1000)
 camera.position.set(-0.2, 5, 10) 
 camera.rotation.set(-0.1, -0.2, -0.004)
-camera.setFocalLength(13);
+camera.setFocalLength(12.5);
 
 const threeScene = document.querySelector('#scene')
 const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true })
@@ -192,6 +192,7 @@ image.style.height = '60px';
 const welcomeText = document.createElement('div');
 welcomeText.className = 'label';
 welcomeText.textContent = text[i];
+welcomeText.style.opacity = 1;
 
 const arrowSvg = `<?xml version="1.0" encoding="UTF-8"?>
 <svg  xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2024.11 1514.92">
@@ -213,7 +214,7 @@ wrapper.appendChild(bottomMenu);
 
 // view tee's design work
 const designLink = document.createElement('a');
-designLink.className = 'figma-link';
+designLink.className = 'design-link';
 designLink.href = 'https://studio.teetopor.art/design'
 designLink.target = '_blank'
 designLink.textContent = "Design Work"
@@ -223,7 +224,7 @@ bottomMenu.appendChild(designLink);
 // view tee's art work
 
 const artLink = document.createElement('a');
-artLink.className = 'about-link';
+artLink.className = 'art-link';
 artLink.href='https://studio.teetopor.art/art'
 artLink.textContent = "Art Work"
 artLink.style.opacity = '0';
@@ -234,7 +235,6 @@ const aboutModal = document.querySelector('#about');
 aboutLink.addEventListener('click', () => {
   aboutModal.classList.add('visible');
   aboutModal.classList.remove('hidden');
-  console.log('clicked about')
 })
 const closeAbout = document.querySelector('#escape')
 closeAbout.addEventListener('click', () => {
@@ -254,24 +254,27 @@ function checkLastText() {
     designLink.style.opacity = '0' 
     artLink.style.opacity = '0'
     nextButton.style.opacity = '1'
-    nextButton.style.transition = 'opacity 1s ease-in-out'
+    nextButton.style.transition = 'opacity 1s ease-in'
     bottomMenu.style.zIndex = '0'
   }
 }
 
 welcomeText.addEventListener('click', () => {
-  i = (i + 1) % text.length; 
-  welcomeText.textContent = text[i];  
-  fadeInText();
-  checkLastText();
-  console.log('clicked');
+  welcomeText.style.opacity = 0; 
+  setTimeout(() => {
+    i = (i + 1) % text.length; 
+    welcomeText.textContent = text[i]; 
+    void welcomeText.offsetWidth;
+    welcomeText.style.opacity = 1; 
+
+    checkLastText();
+
+  }, 500);  
 });
 
 
 
 function fadeInText() {
-  welcomeText.style.opacity = 0;  
-  welcomeText.style.transition = 'opacity 0.5s ease-in-out'; 
   setTimeout(() => {
     welcomeText.style.opacity = 1; 
 
