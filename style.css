@@ -12,6 +12,7 @@
 body{
     margin: 0;
     color: var(--dark-purple);
+    overflow: hidden;
     font-family: 'Aether';
     background: #7c00ff;
     background: linear-gradient(360deg, rgba(124,0,255,1) 19%, rgba(218,120,182,1) 51%, rgba(255,167,154,1) 76%, rgba(75,152,210,1) 100%); 
