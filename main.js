@@ -253,10 +253,26 @@ wrapper.appendChild(bottomMenu);
 const designLink = document.createElement('a');
 designLink.className = 'design-link';
 designLink.href = 'https://studio.teetopor.art/design'
-designLink.target = '_blank'
+// designLink.target = '_blank'
 designLink.textContent = "Design Work"
 designLink.style.opacity = '0';
 bottomMenu.appendChild(designLink);
+
+designLink.addEventListener('click', (event) => {
+  event.preventDefault(); // Prevent immediate navigation
+  const targetURL = designLink.href;
+
+  // Test simple animation first
+  gsap.to("body", {
+    filter: "blur(10px)", // Apply blur
+    duration: 1, // Duration of the animation
+    onComplete: () => {
+      window.location.href = targetURL; // Navigate after animation
+    },
+  });
+});
+
+
 
 // view tee's art work
 
@@ -266,6 +282,21 @@ artLink.href='https://studio.teetopor.art/art'
 artLink.textContent = "Art Work"
 artLink.style.opacity = '0';
 bottomMenu.appendChild(artLink);
+
+artLink.addEventListener('click', (event) => {
+  event.preventDefault(); // Prevent immediate navigation
+  const targetURL = artLink.href;
+
+  // Test simple animation first
+  gsap.to("body", {
+    filter: "blur(10px)", // Apply blur
+    duration: 1, // Duration of the animation
+    onComplete: () => {
+      window.location.href = targetURL; // Navigate after animation
+    },
+  });
+});
+
 
 const aboutModal = document.querySelector('#about');
 
@@ -325,6 +356,7 @@ function fadeInText() {
 
   }, 500);  
 }
+
 
 
 // Parameters
